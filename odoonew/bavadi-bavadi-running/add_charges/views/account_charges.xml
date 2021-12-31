@@ -1,0 +1,18 @@
+<odoo>
+
+        <record id="account_charges" model="ir.ui.view">
+            <field name="name">add_charges_account_charges</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@id='invoice_tab']/group/field[@name='amount_untaxed']" position="after">
+                    <field name="ship_charge" widget="monetary" options="{'currency_field': 'currency_id'}"
+                           groups="add_charges.group_shipping_charge_account_checker"/>
+                    <field name="transport_charge" widget="monetary" options="{'currency_field': 'currency_id'}"
+                           groups="add_charges.group_transportation_charge_account_checker"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

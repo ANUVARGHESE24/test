@@ -1,0 +1,62 @@
+<odoo>
+
+        <record id="res_config_settings_view_form_multi_op_unit" model="ir.ui.view">
+            <field name="name">multi.op_unit.res.config.settings.view.form.op.units</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='general_settings']/div[@id='companies']" position="after">
+                    <h2>Operating Units</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <field name="op_unit_id" invisible="1"/>
+                                <field name="op_unit_name" class="font-weight-bold"/>
+                                <field name="op_unit_informations" class="text-muted" style="width: 90%;"/>
+                                <button name="open_op_unit" icon="fa-arrow-right" type="object" string="Update Info" class="btn-link"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <field name="op_unit_count" class="w-auto pl-1 font-weight-bold"/>
+                                <span class="o_form_label">
+                                    Operating Units
+                                </span>
+                                <br/>
+                                <div class="mt8">
+                                    <button name="194" icon="fa-arrow-right" type="action" string="Manage Operating Units" class="btn-link"/>
+<!--                                    <button name="operating_unit.action_operating_unit_tree" icon="fa-arrow-right" string="Manage Operating Units" class="btn-link"/>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="res_config_settings_view_form_hide_op_unit" model="ir.ui.view">
+            <field name="name">multi.op_unit.settings.view.form.hide.op.unit</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account_department.res_config_settings_view_form_account_department"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='others']" position="inside">
+                        <div class="col-12 col-lg-6 o_setting_box" title="If enabled, shows Operating Unit field in Journal lines of Account module">
+                            <div class="o_setting_left_pane">
+                                <field name="group_op_unit_in_journal_lines" string="Operating Unit field in Journal lines"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_op_unit_in_journal_lines"/>
+                                <div class="text-muted">
+                                    If enabled, shows Operating Unit field in Journal lines
+                                </div>
+                            </div>
+                        </div>
+                </xpath>
+            </field>
+        </record>
+
+
+</odoo>

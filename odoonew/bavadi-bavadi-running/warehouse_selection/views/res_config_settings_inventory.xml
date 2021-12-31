@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="30"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]/div[@data-key='stock']/div[6]" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="group_warehouse_selection"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_warehouse_selection"/>
+                            <div class="text-muted">
+                                Activates Warehouse selection field in Purchase module and Sales Module
+                            </div>
+                        </div>
+
+                    </div>
+                </xpath>
+                <xpath expr="//div[hasclass('settings')]/div[@data-key='stock']/div[6]" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="warehouse_selection"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="warehouse_selection"/>
+                            <div class="text-muted">
+                                Default Warehouse Selection in Sales and Purchase module
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

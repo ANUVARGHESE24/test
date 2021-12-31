@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="mai_pos_delivery_mode_id" inherit_id="point_of_sale.assets">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" href="/mai_pos_delivery_mode/static/src/css/mai_pos_delivery_mode.css" id="pos-deliverymode-stylesheet"/>
+				<script type="text/javascript" src="/mai_pos_delivery_mode/static/src/js/mai_pos_delivery_mode.js"></script>
+				<link rel="stylesheet" href="/mai_pos_delivery_mode/static/src/css/scrollbar.css" />
+<!--				<script type="text/javascript" src="/mai_pos_delivery_mode/static/src/js/pizza.js"></script>-->
+			</xpath>
+		</template>
+	</data>
+</odoo>

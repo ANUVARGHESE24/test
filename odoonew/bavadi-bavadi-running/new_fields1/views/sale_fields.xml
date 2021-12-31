@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="sale_new_fields" model="ir.ui.view">
+            <field name="name">new_fields1.sale_new_fields</field>
+            <field name="model">sale.order</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@name='order_lines']/group[@name='note_group']/group[1]/field[@name='note']" position="before">
+                    <group class="col-3">
+                        <field name="container_no"/>
+                        <field name="vessel_no"/>
+                    </group>
+                </xpath>
+
+                <xpath expr="//sheet/group/group[2]/field[@name='payment_term_id']" position="after">
+                        <field name="country_origin"/>
+                </xpath>
+
+            </field>
+        </record>
+
+</odoo>

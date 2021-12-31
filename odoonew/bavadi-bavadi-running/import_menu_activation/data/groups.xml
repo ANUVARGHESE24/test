@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="group_import_vendor_bills_checker" model="res.groups">           <!-- group for the checkbox in settings -->
+            <field name="name">Import Vendor Bills</field>
+        </record>
+        <record id="group_import_invoice_bills_checker" model="res.groups">           <!-- group for the checkbox in settings -->
+            <field name="name">Import Invoice Bills</field>
+        </record>
+
+
+        <record model="ir.ui.menu" id="purchase_vendor.purchase_vendors_import_vendor_bills">
+            <field name="groups_id" eval="[(6,0, [ref('group_import_vendor_bills_checker'), ])]"/>
+        </record>
+        <record model="ir.ui.menu" id="sales_customer.sales_customers_importinvoicebills">
+            <field name="groups_id" eval="[(6,0, [ref('group_import_invoice_bills_checker'), ])]"/>
+        </record>
+
+
+</odoo>

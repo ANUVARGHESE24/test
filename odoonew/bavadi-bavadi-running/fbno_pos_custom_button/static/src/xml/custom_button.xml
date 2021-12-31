@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <templates id="template_custom_pos_payment_button_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+		<t t-name="SubmitOrderButton">
+		    <t t-jquery="div[class='control-button order-submit']" t-operation="replace">
+				 <span class="control-button order-submit custom-order-button">
+					<i class="fa fa-cutlery"></i>
+					Order
+				</span>
+		    </t>
+		</t>
+  	</templates>

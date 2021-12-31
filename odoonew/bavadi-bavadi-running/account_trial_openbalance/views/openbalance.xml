@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_trialbalanceinherit" inherit_id="base_accounting_kit.report_trial_balance">
+         <xpath expr="//t/t/div/table[@class='table table-sm table-reports']" position="replace">
+                                  <table class="table table-sm table-reports">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Account</th>
+                                <th class="text-left">Open Balance</th>
+                                <th class="text-left">Debit</th>
+                                <th class="text-left">Credit</th>
+                                <th class="text-left">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="Accounts" t-as="account">
+                                <td>
+                                    <span t-att-style="style" t-esc="account['code']"/>
+                                </td>
+                                <td>
+                                    <span style="color: white;" t-esc="'..'"/>
+                                    <span t-att-style="style" t-esc="account['name']"/>
+                                </td>
+                                <tr t-foreach="Accounted" t-as="account">
+                                  <td class="text-left">
+                                    <span t-att-style="style" t-esc="account['balance']"
+                                          t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                </td>
+                             </tr>
+                                <td class="text-left">
+                                    <span t-att-style="style" t-esc="account['credit']"
+                                          t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                </td>
+                                 <td class="text-left">
+                                    <span t-att-style="style" t-esc="account['credit']"
+                                          t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                </td>
+                                <td class="text-left">
+                                    <span t-att-style="style" t-esc="account['balance']"
+                                          t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+             <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Account</th>
+                                <th class="text-left">Open Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="Accounted" t-as="account">
+                                <td>
+                                    <span t-att-style="style" t-esc="account['code']"/>
+                                </td>
+                                <td>
+                                    <span style="color: white;" t-esc="'..'"/>
+                                    <span t-att-style="style" t-esc="account['name']"/>
+                                </td>
+                                  <td class="text-left">
+                                    <span t-att-style="style" t-esc="account['balance']"
+                                          t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                </td>
+                             </tr>
+                        </tbody>
+                    </table>
+         </xpath>
+
+    </template>
+</odoo>

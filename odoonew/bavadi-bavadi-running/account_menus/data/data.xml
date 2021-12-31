@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_customer_invoice_bill" model="res.groups">
+            <field name="name">Import Customer Invoice Bill</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="group_vendor_bill" model="res.groups">
+            <field name="name">Import Vendor Bills</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <!--These menus are already having a group "group_manager", so we have to Replace it with new group-->
+        <record model="ir.ui.menu" id="invoice_vendor_bill_bulk_import.bi_import_invoice_vendor_menu" >
+            <field name="groups_id" eval="[(6,0, [ref('group_customer_invoice_bill')])]"/>
+        </record>
+
+        <record model="ir.ui.menu" id="invoice_vendor_bill_bulk_import.bi_import_invoice_vendor_menu2" >
+            <field name="groups_id" eval="[(6,0, [ref('group_vendor_bill')])]"/>
+        </record>
+    </data>
+</odoo>

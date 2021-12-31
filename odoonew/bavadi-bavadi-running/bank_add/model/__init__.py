@@ -1,0 +1,1 @@
+from . import company_inherit_new

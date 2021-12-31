@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="new_res_config_settings_view_form_purchase" model="ir.ui.view">
+            <field name="name">new_settings_view_form_purchase</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='purchase']/div[2]" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Vendor' menu on Purchase module">
+                        <div class="o_setting_left_pane">
+                            <field name="group_vendor_bill_checker" string="Direct Vendor bill"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_vendor_bill_checker"/>
+                            <div class="text-muted">
+                                If enabled, Vendor options will be available
+                            </div>
+                        </div>
+                    </div>
+
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="purchase_vendor_button_access" model="ir.ui.view">
+            <field name="name">button_access</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@id='account_invoice_payment_btn']" position="attributes">
+                    <attribute name="groups">purchase_vendor.vendor_admin</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+        <menuitem id="purchase_menu_finance_payables"
+                  name="Vendors"
+                  parent="purchase.menu_purchase_root"
+                  groups="purchase_vendor.group_vendor_bill_checker"
+                  action="account.action_account_payments_payable"
+                  sequence="6"/>
+
+
+        <menuitem id="purchase_vendors_bills"
+                  name="Bills"
+                  parent="purchase_menu_finance_payables"
+                  action="account.action_move_in_invoice_type"
+                  sequence="1"/>
+        <menuitem id="purchase_vendors_refund"
+                  name="Refund"
+                  parent="purchase_menu_finance_payables"
+                  action="account.action_move_in_refund_type"
+                  sequence="2"/>
+        <menuitem id="purchase_vendors_receipts"
+                  name="Receipts"
+                  parent="purchase_menu_finance_payables"
+                  action="account.action_move_in_receipt_type"
+                  sequence="3"/>
+        <menuitem id="purchase_vendors_import_vendor_bills"
+                  name="Import Vendor bills"
+                  parent="purchase_menu_finance_payables"
+                  action="invoice_vendor_bill_bulk_import.import_invoice_wizard_action"
+                  sequence="4"/>
+        <menuitem id="purchase_vendors_payments"
+                  name="Payments"
+                  parent="purchase_menu_finance_payables"
+                  action="account.action_account_payments_payable"
+                  sequence="10"/>
+        <menuitem id="purchase_vendors_products"
+                  name="Products"
+                  parent="purchase_menu_finance_payables"
+                  action="account.product_product_action_purchasable"
+                  sequence="11"/>
+        <menuitem id="purchase_vendors_vendors"
+                  name="Vendors"
+                  parent="purchase_menu_finance_payables"
+                  action="account.res_partner_action_supplier"
+                  sequence="12"/>
+
+</odoo>

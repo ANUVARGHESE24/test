@@ -1,0 +1,113 @@
+<odoo>
+
+    <report
+        id="report_pdf"
+        model="sale.order"
+        string="PDF Report"
+        name="pdf_report.report_pdf_view"
+        file="pdf_report.report_pdf"
+        report_type="qweb-pdf"
+        print_report_name="(object._get_report_base_filename())"/>
+
+
+    <template id="report_pdf_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="pdf_report.external_layout">
+                    <div class="page">
+                        <br/>
+                        <t t-if="doc.state == 'draft'">
+                            <h3 class="text-muted">QUOTATION</h3>
+                            <div style="width: 200px; float:left; height:100px; margin:5px">
+                                <p style="color:darkblue;">
+                                    DATE: <span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/><br/>
+                                    QUOTATION NO.<span t-field="doc.name"/>
+                                </p>
+                            </div>
+                        </t>
+                        <t t-else="doc.state == 'sale'">
+                            <h3 class="text-muted">ORDER</h3>
+                            <div style="width: 200px; float:left; height:100px; margin:5px">
+                                <p style="color:darkblue;">
+                                    DATE: <span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/><br/>
+                                    ORDER NO.<span t-field="doc.name"/>
+                                </p>
+                            </div>
+                        </t>
+                        <div style="width: 500px; float:left;">
+                            <p style="color:darkblue;">BILL TO:</p>
+                            <t t-foreach="doc.partner_id" t-as="customer">
+                                <p>
+                                    COMPANY NAME : <span t-field="customer.name"/><br/>
+                                    ADDRESS : <span t-field="customer.city"/>, <span t-field="customer.state_id"/>, <span t-field="customer.country_id"/><br/>
+                                    TEL NO : <span t-field="customer.phone"/><br/>
+                                    EMAIL  : <span t-field="customer.email"/><br/>
+                                </p>
+                            </t>
+                        </div>
+                        <br/>
+                        <div>
+                            <table class="table table-condensed" style="border:1px solid black;">
+                                <t t-set="i" t-value="1"/>
+                                <t t-set="qty" t-value="0"/>
+                                <t t-set="subtotal" t-value="doc.amount_tax"/>
+                                <t t-set="currency" t-value="doc.partner_id.currency_id.symbol"/>
+                                <t t-set="currency_name" t-value="doc.partner_id.currency_id.name"/>
+
+                                <tr style="border:1px solid black; background-color:cornflowerblue; color:white;">
+                                    <th style="width:10%; vertical-align:top; text-align:center; font-size:18px;">SL.NO</th>
+                                    <th style="width:35%; vertical-align:top; text-align:center; font-size:18px;">DESCRIPTION</th>
+                                    <th style="width:10%; vertical-align:top; text-align:center; font-size:18px;">QTY</th>
+                                    <th style="width:25%; vertical-align:top; text-align:center; font-size:18px;">PRICE IN <span t-esc="currency"/></th>
+                                    <th style="width:25%; vertical-align:top; text-align:center; font-size:18px;">TOTAL IN <span t-esc="currency"/></th>
+                                </tr>
+
+                                <t t-foreach="doc.order_line" t-as="order">
+                                    <tr>
+                                        <td style="width:10%; text-align:center; font-size:14px; border:1px solid black;">
+                                            <span t-esc="i"/>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </td>
+                                        <td style="width:35%; text-align:center; font-size:14px; border:1px solid black;"><span t-field="order.name"/></td>
+                                        <td style="width:10%; text-align:center; font-size:14px; border:1px solid black;"><span t-field="order.product_uom_qty"/></td>
+                                        <td style="width:25%; text-align:center; font-size:14px; border:1px solid black;"><span t-field="order.price_unit"/></td>
+                                        <td style="width:25%; text-align:right; font-size:14px; border:1px solid black;"><span t-esc="float(order.price_total)"/></td>
+                                        <t t-set="qty" t-value="qty + order.product_uom_qty"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="2" style="text-align:right; font-size:14px; border:1px solid black;">CTNS</td>
+                                    <td style="text-align:center; font-size:14px;"><span t-esc="qty"/></td>
+                                    <td colspan="2" style="text-align:right; font-size:14px; border:1px solid black;"> </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" style="text-align:right; font-size:14px;">CONTAINER NO.</td>
+                                    <td style="text-align:right; font-size:14px;"> </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="4" style="text-align:right; font-size:14px;">SUBTOTAL: </td>
+                                    <td style="text-align:right; font-size:14px;"><span t-esc="currency"/> <span t-esc="subtotal + doc.amount_untaxed"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:right; font-size:14px;">SHIPPING CHARGES: </td>
+                                    <td style="text-align:right; font-size:14px;"><span t-esc="currency"/> <span t-esc="float(doc.ship_charge)"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:right; font-size:14px;">TRANSPORT: </td>
+                                    <td style="text-align:right; font-size:14px;"><span t-esc="currency"/> <span t-esc="float(doc.transport_charge)"/></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:right; font-size:14px;">GRAND TOTAL IN <span t-esc="currency_name"/>: </td>
+                                    <td style="text-align:right; font-size:14px;"><span t-esc="currency"/> <span t-esc="float(doc.amount_total)"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

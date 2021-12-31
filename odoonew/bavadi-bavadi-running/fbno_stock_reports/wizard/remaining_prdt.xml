@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="remaining_product_form" model="ir.ui.view">
+            <field name="name">remaining.product.wizard</field>
+            <field name="model">remaining.product</field>
+            <field name="arch" type="xml">
+                <form string="Remaining Products">
+                    <group class="oe_title">
+                        <field name="product"/>
+                        <field name="location"/>
+                    </group>
+                    <footer>
+                        <button name="print_report" string="Print PDF" type="object" class="btn-primary"/>
+                        <button name="print_excel_report" string="Print EXCEL" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="remaining_product_wizard" model="ir.actions.act_window">
+            <field name="name">Remaining Products</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">remaining.product</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="remaining_product_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

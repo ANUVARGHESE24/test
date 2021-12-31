@@ -1,0 +1,12 @@
+<odoo>
+
+    <t t-name="UserMenu.Actions">                  <!-- in web/static/src/xml/base.xml-->
+        <a role="menuitem" href="#" data-menu="documentation" class="dropdown-item" hidden="True">Documentation</a>
+        <a role="menuitem" href="#" data-menu="support" class="dropdown-item" hidden="True">Support</a>
+        <div role="separator" class="dropdown-divider" hidden="True"/>
+        <a role="menuitem" href="#" data-menu="settings" class="dropdown-item">Preferences</a>
+        <a role="menuitem" href="#" data-menu="account" class="dropdown-item">My Febno.com</a>
+        <a role="menuitem" href="#" data-menu="logout" class="dropdown-item">Log out</a>
+    </t>
+
+</odoo>

@@ -1,0 +1,25 @@
+<odoo>
+
+
+        <record id="account_delivery_id_field" model="ir.ui.view">
+            <field name="name">sales.shipment.status.account.delivery.id.field</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@id='other_tab']" position="inside">
+                    <group class="col-6" string="Delivery"
+                           name="delivery_group"
+                           attrs="{'invisible': ['|', ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund')), ('invoice_origin', '=', False)]}">
+                        <field name="delivery_id"
+                               domain="[('origin', '=', invoice_origin)]"
+                               options="{'no_create': True}"/>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+</odoo>

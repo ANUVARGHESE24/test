@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+                id="purchase_vendor.purchase_vendors_receipts"
+                name="Receipts"
+                action="account.action_move_in_receipt_type"
+                parent="purchase_vendor.purchase_menu_finance_payables"
+                groups="group_vendor_receipts"
+                sequence="1"/>
+    </data>
+</odoo>

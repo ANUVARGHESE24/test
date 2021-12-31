@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       <data>
+        <record id="account_day_close_form_view" model="ir.ui.view">
+            <field name="name">account.day.close.form.view</field>
+            <field name="model">dayclose.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Day Close Report">
+                     <group>
+                         <field name="date_from"/>
+                         <field name="date_to"/>
+                         <field name="operating_unit_id"/>
+                     </group>
+                    <footer>
+                        <button name="print_dayclose_report" string="Print PDF" type="object" default_focus="1"
+                                class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_day_close_view" model="ir.actions.act_window">
+            <field name="name">Day Close Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">dayclose.report.wizard</field>
+            <field name="view_id" ref="account_day_close_form_view"/>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="account_day_close_menu" name="Day Close Report" action="action_account_day_close_view"
+                  parent="base_accounting_kit.account_reports_daily_reports"/>
+    </data>
+
+
+</odoo>

@@ -1,0 +1,36 @@
+<odoo>
+
+    <record id="product_price" model="ir.ui.view">
+        <field name="name">product.price.access.product.price</field>
+        <field name="model">product.template</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='pricing']/field[@name='list_price']" position="attributes">
+                <attribute name="groups">product_price_access.group_sales_price</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='pricing']/button[@name='open_pricelist_rules']" position="replace">
+                <button name="open_pricelist_rules" icon="fa-arrow-right" type="object"
+                        groups="product.group_product_pricelist" class="oe_inline">
+                    <field name="pricelist_item_count" attrs="{'invisible': [('pricelist_item_count', '=', 0)]}"/>
+                    <span attrs="{'invisible': [('pricelist_item_count', '=', 1)]}">
+                        Extra Prices List
+                    </span>
+                    <span attrs="{'invisible': [('pricelist_item_count', '!=', 1)]}">
+                        Extra Price List
+                    </span>
+                </button>
+            </xpath>
+
+
+            <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]/group[@name='group_standard_price']/label[2]" position="attributes">
+                <attribute name="groups">product_price_access.group_cost</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='general_information']/group[1]/group[@name='group_standard_price']/div[@name='standard_price_uom']" position="attributes">
+                <attribute name="groups">product_price_access.group_cost</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

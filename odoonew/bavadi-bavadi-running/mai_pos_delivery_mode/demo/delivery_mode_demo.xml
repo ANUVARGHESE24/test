@@ -1,0 +1,29 @@
+<odoo>
+	<data noupdate="1">
+
+		<record id="object0" model="pos.deliverymode">
+			<field name="name">Delivery - Web</field>
+		</record>
+
+		<record id="object1" model="pos.deliverymode">
+			<field name="name">Delivery - Whats App</field>
+		</record>
+
+		<record id="object2" model="pos.deliverymode">
+			<field name="name">Delivery - Phone</field>
+		</record>
+
+		<record id="object3" model="pos.deliverymode">
+			<field name="name">Delivery - HelloFood</field>
+		</record>
+
+		<record id="object4" model="pos.deliverymode">
+			<field name="name">Take Away</field>
+		</record>
+
+		<record id="object5" model="pos.deliverymode">
+			<field name="name">Dine In</field>
+		</record>
+
+	</data>
+</odoo>

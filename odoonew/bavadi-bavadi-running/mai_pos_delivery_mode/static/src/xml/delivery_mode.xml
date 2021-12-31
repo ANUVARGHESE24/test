@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="DeliveryModeWidget">
+		<span class="delivery_mode" >
+			<t t-esc="widget.get_mode()" />
+		</span>
+	</t>
+
+	<t t-name="DmPopupWidget">
+		<div class="modal-dialog">
+			<div class="popup popup-alert">
+				<p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+				<p class="body"><t t-esc=" widget.options.body || '' "/></p>
+				<div class="footer">
+					<div class="button cancel">
+						Ok	
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="DeliveryModeSelectionPopupWidget">
+		<div class="modal-dialog modal-lg">
+			<div class="popup popup-selection">
+				<p class="title"><t t-esc=" widget.options.title || 'Select' " /></p>
+				<div style="height: 75vh; overflow-y: scroll;">
+					<div class='thumbs-flex-wrapper'>
+						<t t-foreach="widget.list || []" t-as="item">
+							<div class='thumb-item'>
+								<div class="thumb-inner" t-att-data-item-index='item_index' t-attf-style="{{ item.image }}"></div>
+								<div class="thumb-text">
+								  <span class="thumb-title">
+									  <t t-esc='item.label'/>
+								  </span>
+								</div>
+							</div>
+						</t>
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<t t-extend="Chrome">
+		<t t-jquery = '.loader' t-operation="after" >
+			<iframe id="printFrame" style="display:none;" name="printFrame" />
+		</t>
+		<t  t-jquery = '.pos-logo' t-operation="after" >
+			<span class="placeholder-DeliveryModeWidget">
+			</span>
+		</t>
+	</t>
+	
+</templates>
+
+
+

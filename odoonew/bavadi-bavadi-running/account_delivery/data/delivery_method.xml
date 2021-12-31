@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ship_delivery_product" model="product.product">                     <!-- ship delivery product -->
+            <field name="name">Ship Delivery</field>
+            <field name="type">service</field>
+            <field name="default_code">Delivery_SH</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+        </record>
+
+        <record id="ship_delivery_method" model="delivery.carrier">                     <!-- ship delivery method -->
+            <field name="name">Ship Delivery Charges</field>
+            <field name="active">1</field>
+            <field name="delivery_type">fixed</field>
+            <field name="product_id" ref="account_delivery.ship_delivery_product"/>
+        </record>
+
+
+
+        <record id="transport_delivery_product" model="product.product">                     <!-- transport delivery product -->
+            <field name="name">Transportation Delivery</field>
+            <field name="type">service</field>
+            <field name="default_code">Delivery_TR</field>
+            <field name="categ_id" ref="delivery.product_category_deliveries"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="purchase_ok" eval="False"/>
+            <field name="list_price">0.0</field>
+        </record>
+
+        <record id="transport_delivery_method" model="delivery.carrier">                     <!-- transport delivery method -->
+            <field name="name">Transport Delivery Charges</field>
+            <field name="active">1</field>
+            <field name="delivery_type">fixed</field>
+            <field name="product_id" ref="account_delivery.transport_delivery_product"/>
+        </record>
+
+    </data>
+</odoo>

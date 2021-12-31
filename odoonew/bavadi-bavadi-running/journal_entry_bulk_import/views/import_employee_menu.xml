@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<menuitem
+				id="bi_import_journal_menu"
+				name="Import journal Entries"
+				action="import_journal_wizard_action"
+				parent="account.menu_finance_entries_accounting_miscellaneous"
+				groups="account.group_account_manager"
+				sequence="2"
+		/>
+
+	</data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="pos_custom_assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/fbno_posback_security/static/src/js/back_button.js"></script>
+                <script type="text/javascript" src="/fbno_posback_security/static/src/js/floor_back_button.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

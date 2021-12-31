@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="view_account_invoice_report_search" model="ir.ui.view">
+        <field name="name">account.invoice.report.search</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="account.view_account_invoice_report_search"/>
+        <field name="arch" type="xml">
+            <field name="invoice_date" position="after">
+                <field name="operating_unit_id"/>
+            </field>
+            <xpath expr="//filter[1]" position="after">
+                <filter
+                        name='group_by_operating_unit_id'
+                        string="Operating Unit"
+                        context="{'group_by':'operating_unit_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <template id="inherit_report_invoice_document" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('mt16')]" position="after">
+            <div>
+                <t t-if="o.operating_unit_id">Branch</t>:
+                <span t-field="o.operating_unit_id.name"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

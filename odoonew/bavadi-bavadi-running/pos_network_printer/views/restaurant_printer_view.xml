@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="restaurant_printer_form_inherit" model="ir.ui.view">
+      <field name="name">restaurant.printer.form.inherit</field>
+      <field name="model">restaurant.printer</field>
+      <field name="inherit_id" ref="pos_restaurant.view_restaurant_printer_form"/>
+      <field name="arch" type="xml">
+        <field name="proxy_ip" position="attributes">
+          <attribute name="string">IP Adress</attribute>
+          <attribute name="required">1</attribute>
+        </field>
+        <field name="proxy_ip" position="after">
+          <field name="printer_port"/>
+          <field name="connector_id"/>
+        </field>
+      </field>
+    </record>
+
+    <record id="restaurant_printer_tree_inherit" model="ir.ui.view">
+      <field name="name">restaurant.printer.tree.inherit</field>
+      <field name="model">restaurant.printer</field>
+      <field name="inherit_id" ref="pos_restaurant.view_restaurant_printer"/>
+      <field name="arch" type="xml">
+        <field name="proxy_ip" position="attributes">
+          <attribute name="string">IP Adress</attribute>
+        </field>
+        <field name="proxy_ip" position="after">
+          <field name="printer_port"/>
+          <field name="connector_id"/>
+        </field>
+      </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="view_company_form_fields" model="ir.ui.view">
+        <field name="name">febno.invoice.stndrd.new.view.company.form.fields</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page/group/group[1]/div[@class='o_address_format']/field[@name='country_id']" position="attributes">
+                <attribute name="options">{"no_open": False}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='ifcode']" position="after">
+                <field name ="iban1"/>
+                <field name ="swift1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='ifscode']" position="after">
+                <field name ="iban2"/>
+                <field name ="swift2"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='tax_ids']" position="after">
+                <field name ="tax_custom" optional="hide"> </field>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

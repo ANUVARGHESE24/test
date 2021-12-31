@@ -1,0 +1,46 @@
+<odoo>
+	<data>
+		<record id="delivery_mode" model="ir.ui.view">
+			<field name="name">delivery_mode</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+			<field name="arch" type="xml">
+				 <xpath expr="//field[@name='fiscal_position_id']" position="after">
+					<field name="delivery_mode_id" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_dm_form" model="ir.ui.view">
+			<field name="name">Delivery Mode</field>
+			<field name="model">pos.deliverymode</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_deliverymode_tree" model="ir.ui.view">
+			<field name="name">area</field>
+			<field name="model">pos.deliverymode</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_deliverymode" model="ir.actions.act_window">
+			<field name="name">Delivery Mode</field>
+			<field name="res_model">pos.deliverymode</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem id="menu_deliverymode" action="action_deliverymode" parent="point_of_sale.menu_point_of_sale"/>
+	</data>
+</odoo>

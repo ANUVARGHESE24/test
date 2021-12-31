@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_transfer_details">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+                    <table class="table table-sm o_main_table">
+                        <thead>
+                            <tr>
+                                <th style="text-align:left;">
+
+                                        <span>Date</span>
+
+                                </th>
+
+                                <th style="text-align:left;">
+
+                                        <span>Source</span>
+
+                                </th>
+                                <th style="text-align:left;">
+
+
+                                        <span>Destination</span>
+
+                                </th>
+                                <th style="text-align:left;">
+
+                                        <span>Transfered Quantity</span>
+
+                                </th>
+                                <th style="text-align:left;">
+                                    
+                                        <span>Cost</span>
+
+                                </th>
+                                <th style="text-align:left;">
+
+                                        <span>COGS</span>
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+<!--                                <td style="text-align:left;">-->
+<!--                                    <h5><strong> <span t-esc="form_data['product_id'][1]"/></strong></h5>-->
+<!--                                    </td>-->
+                            </tr>
+                                <tr t-foreach="products" t-as="line">
+                                    <td style="text-align:left;">
+                                        <span t-esc="line['date']"/>
+                                    </td>
+
+                                    <td style="text-align:left;">
+                                        <span t-esc="line['location_id']"/>
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <span t-esc="line['location_dest_id']"/>
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <span t-esc="line['qty_done']"/>
+                                    </td>
+<!--                                   <td style="text-align:left;">-->
+<!--                                        <span t-esc="line['qty_available']"/>-->
+<!--                                    </td>-->
+                                    <td style="text-align:left;">
+                                        <span t-esc="'%.2f'% line['cost']"/>
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <span t-esc="'%.2f'% (line['cost']*line['qty_done'])"/>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

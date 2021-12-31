@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_customer_invoicing" model="res.groups">
+            <field name="name">Direct Customer Invoicing</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record model="ir.module.category" id="base.module_category_sales">
+            <field name="description">Helps you manage the customer invoices.</field>
+            <field name="sequence">14</field>
+        </record>
+
+        <record id="module_category_sales_customer_menu" model="ir.module.category">
+            <field name="name">Customer Invoice</field>
+            <field name="parent_id" ref="base.module_category_sales"/>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_invoicing_only" model="res.groups">
+            <field name="name">Invoicing only</field>
+            <field name="comment">The user will not have access to Register Payment.</field>
+            <field name="category_id" ref="module_category_sales_customer_menu"/>
+        </record>
+        <record id="group_administrator" model="res.groups">
+            <field name="name">Administrator</field>
+            <field name="comment">The user will have access to Register Payment Button.</field>
+            <field name="category_id" ref="module_category_sales_customer_menu"/>
+            <field name="implied_ids" eval="[(4, ref('group_invoicing_only'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+    </data>
+</odoo>

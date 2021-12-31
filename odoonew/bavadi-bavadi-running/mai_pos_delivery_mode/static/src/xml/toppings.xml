@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="DuplicateDeliveryDialog">
+		<div class="modal-dialog modal-lg">
+			<div class="popup popup-number">
+				<p class="title">Delivery Location  Already Added</p>
+				<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+				<div class="footer centered">
+					<div class="button ok">
+						Ok
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+	
+	<t t-name="ReceiptScreenWidget">
+		<t t-jquery=".receipt-screen screen" t-operation="replace">
+			<div class='receipt-screen screen'>
+				<div class='screen-content'>
+					<div class='top-content'>
+						<h1>Change: <span class='change-value'>0.00</span></h1>
+						<span class='button next'>
+							Next Order
+							<i class='fa fa-angle-double-right'></i>
+						</span>
+					</div>
+					<div class="centered-content touch-scrollable">
+						<div class="button print-custom">
+							<i class='fa fa-print'></i> Print Receipt
+						</div>
+						<div class="pos-receipt-container">
+						</div>
+					</div>
+				</div>
+			</div>
+		</t>
+	</t>
+
+	
+	<t t-extend="OrderReceipt">
+		<t t-jquery=".orderlines" t-operation="before">
+			<div style="font-size: 17px;text-align: center;font-weight: bold;margin-bottom: 6%;">
+				<span >
+					<t t-esc="order.current_delivery_mode_new"/>
+				</span>
+			</div>
+		</t>
+	</t>
+	<t t-extend="OrderChangeReceipt">
+		<t t-jquery="[t-if='changes.new.length > 0']" t-operation="before">
+			<div align="center" style="font-size: 23px;font-weight: bold;margin-bottom: 6%;">
+				<span >
+					<h3><t t-esc="widget.pos.get_order().current_delivery_mode_new"/></h3>
+				</span>
+			</div>
+		</t>
+	</t>
+
+</templates>

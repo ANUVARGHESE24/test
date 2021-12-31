@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+                id="invoice_vendor_bill_bulk_import.bi_import_invoice_vendor_menu"
+                name="Import invoice bills"
+                action="invoice_vendor_bill_bulk_import.import_invoice_wizard_action"
+                parent="account.menu_finance_receivables"
+                groups="group_customer_invoice_bill"
+                sequence="1"/>
+        <menuitem
+                id="invoice_vendor_bill_bulk_import.bi_import_invoice_vendor_menu2"
+                name="Import Vendor bills"
+                action="invoice_vendor_bill_bulk_import.import_invoice_wizard_action"
+                parent="account.menu_finance_payables"
+                groups="group_vendor_bill"
+                sequence="1"/>
+
+    </data>
+</odoo>

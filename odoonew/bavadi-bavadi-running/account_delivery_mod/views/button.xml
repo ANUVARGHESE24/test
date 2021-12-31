@@ -1,0 +1,39 @@
+<odoo>
+    <record id="account_charges_button" model="ir.ui.view">
+            <field name="name">account.delivery.mod.account.charges.button</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account_delivery.account_charges"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[1]/button[@name='action_open_delivery_wizard_ship']" position="replace">
+                    <label for="ship_charge" attrs="{'invisible': [('state', '!=', 'posted')]}" style="font-weight: bold;"/>
+                    <button name="action_open_delivery_wizard_ship" type="object" attrs="{'invisible': [('state', '=', 'posted')]}">
+                        <i class="fa fa-arrow-right mr-1"/>Shipping Charge :
+                    </button>
+                </xpath>
+
+                <xpath expr="//div[3]/button[@name='action_open_delivery_wizard_transport']" position="replace">
+                    <label for="transport_charge" attrs="{'invisible': [('state', '!=', 'posted')]}" style="font-weight: bold;"/>
+                    <button name="action_open_delivery_wizard_transport" type="object" attrs="{'invisible': [('state', '=', 'posted')]}">
+                        <i class="fa fa-arrow-right mr-1"/>Transportation Charge :
+                    </button>
+                </xpath>
+
+            </field>
+    </record>
+
+
+     <record id="account_get_inv_button" model="ir.ui.view">
+            <field name="name">account.delivery.mod.account.get.invoice.button</field>
+            <field name="model">account.move</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_post']" position="before">
+                    <button name="action_get_invoice_no" type="object" string="Get Inv No."
+                            class="oe_highlight" attrs="{'invisible': [('state', '=', 'posted')]}">
+                    </button>
+                </xpath>
+            </field>
+     </record>
+</odoo>

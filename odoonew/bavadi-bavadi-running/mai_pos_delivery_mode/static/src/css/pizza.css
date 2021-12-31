@@ -1,0 +1,159 @@
+.orderline-toppings {
+	background : #CDBBBB ;
+	font-size:12px;
+}
+/*.modal-lg .popup{
+	width: 75% !important;
+	height: 75% !important;
+	padding: 0 10px;
+	box-sizing: border-box;
+}*/
+.flex-wrapper{
+   display:flex;
+   display:-webkit-flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+.selection-topping{
+	width: 200px;
+	max-width: 100%;
+	margin-bottom: 10px;
+	/*box-shadow: 5px 4px 1px #888888;*/
+	height: 30px;
+	font-size: 18px;
+	vertical-align: middle;
+	padding: 20px;
+	border: 1px #CCCCCC solid;
+	/*border-radius: 5px;*/
+	margin: 0 10px 10px;
+	cursor: pointer;
+}
+
+.topping-action{
+width: 200px;
+	max-width: 100%;
+	margin-bottom: 10px;
+	/*box-shadow: 5px 4px 1px #888888;*/
+	height: 32px;
+	vertical-align: middle;
+	padding: 20px;
+	border: 2px black solid !important;
+	/*border-radius: 5px;*/
+	margin: 0 10px 10px;
+	cursor: pointer;
+}
+
+.selection-topping.selected{
+	background : #7c7cab;
+	color: #FFFFFF;
+	position: relative;
+
+}
+.selection-topping.selected:before{
+	content: '';
+	width: 0;
+	height: 0;
+	border-bottom: 30px solid green;
+	border-left: 30px solid transparent;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.selection-topping.selected:after{
+	content: '\2713';
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.no-toppings {
+	background : #ec7c5c;
+	color: #fff;
+}
+.has-toppings{
+	background: #71c79c;
+	color: #fff
+}
+/*.orderline.selected {
+	background-color: #000000 !important;
+}
+*/
+/*.pos .popup .footer{
+position: static !important;
+}*/
+
+.pos .popup .title{
+	background: none !important;
+	border-bottom: none;
+}
+.pos .popup .button{
+	font-size:16px;
+	margin-bottom: 10px;
+}
+@media print {
+  html, body {
+	width: 85mm;
+	height: 95mm;
+			border: 1px #D3D3D3 solid;
+		border-radius: 1px;
+  }
+  /* ... the rest of the rules ...*/
+}
+receipt{
+	width: 152mm;
+	height: 101mm;
+	border: 1px #D3D3D3 solid;
+}
+.title .button.cancel{
+	float: left !important;
+}
+.title .button{
+	margin: 0 !important;
+}
+.popup div.title{
+	padding: 30px 20px !important;
+}
+.title span {
+	display: inline-block;
+	line-height: 42px;
+}
+
+.pos .pos-sale-ticket-pietz {
+	text-align: left;
+	width: 300px;
+	background-color: white;
+	margin: 20px;
+	font-size: 14px;
+	padding-bottom:30px;
+	display: inline-block;
+	font-family: "Inconsolata";
+	border-radius: 3px;
+	overflow: hidden;
+}
+.pos .pos-sale-ticket-pietz pre{
+	font-family: "Inconsolata";
+}
+.pos .pos-sale-ticket-pietz .emph{
+	font-size: 20px;
+	margin:5px;
+}
+.pos .pos-sale-ticket-pietz table {
+	width: 100%;
+	border: 0;
+	table-layout: fixed;
+}
+.pos .pos-sale-ticket-pietz table td {
+	border: 0;
+	word-wrap: break-word;
+}
+
+.pos .selected-prods{
+	background-color: green;
+	color: #fff;
+	padding: 10px;
+}
+.pos .raghav{
+	background: #6EC89B !important;
+    border: solid 1px #64AF8A !important;
+    color: white !important;
+}

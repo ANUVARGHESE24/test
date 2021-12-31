@@ -1,0 +1,71 @@
+<odoo>
+
+    <template id="web.frontend_layout" name="Frontend Layout" inherit_id="web.layout" primary="True">
+        <xpath expr="//head/link[last()]" position="after">
+            <t t-call-assets="web.assets_common" t-js="false"/>
+            <t t-call-assets="web.assets_frontend" t-js="false"/>
+        </xpath>
+        <xpath expr="//head/script[@id='web.layout.odooscript'] | //head/script[last()]" position="after">
+            <script type="text/javascript">
+                odoo.session_info = <t t-raw="json.dumps(request.env['ir.http'].get_frontend_session_info())"/>;
+            </script>
+            <t t-call-assets="web.assets_common_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call-assets="web.assets_frontend_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call="web.conditional_assets_tests"/>
+            <t t-call-assets="web.assets_common_lazy" t-css="false" lazy_load="True"/>
+            <t t-call-assets="web.assets_frontend_lazy" t-css="false" lazy_load="True"/>
+        </xpath>
+        <xpath expr="//t[@t-raw='0']" position="replace">
+            <div id="wrapwrap" t-attf-class="#{pageName or ''}">
+                <header t-if="not no_header" id="top" data-anchor="true">
+                    <img class="img-responsive d-block mx-auto"
+                        t-attf-src="/web/binary/company_logo"
+                        alt="Logo"/>
+                </header>
+                <main>
+                    <t t-raw="0"/>
+                </main>
+                <footer t-if="not no_footer" id="bottom" data-anchor="true" class="bg-light o_footer">
+                    <div id="footer"/>
+                    <div class="o_footer_copyright">
+                        <div class="container py-3">
+                            <div class="row">
+                                <div class="col-sm text-center text-sm-left text-muted">
+                                    <t t-call="web.debug_icon"/>
+                                    <span>Copyright &amp;copy;</span> <span t-field="res_company.name" itemprop="name">Company name</span>
+                                </div>
+                                <div class="col-sm text-center text-sm-right">
+                                    <t t-call="odoo_debranding2.brand_promotion"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="brand_promotion" name="Brand Promotion">
+        <div class="o_brand_promotion">
+            <t t-call="odoo_debranding2.brand_promotion_message">
+                <t t-set="_message"></t>
+                <t t-set="_utm_medium">portal</t>
+            </t>
+        </div>
+    </template>
+
+    <template id="brand_promotion_message" name="Brand Promotion Message">
+        <t t-set="febno_logo">
+            <a target="_blank"
+                t-attf-href="http://www.febno.com"
+                class="badge badge-light">
+                <img alt="Febno"
+                        src="/odoo_debranding2/static/src/img/febno_logo.png"
+                        style="height: 2em; vertical-align: baseline;"/>
+            </a>
+        </t>
+        <t t-set="final_message">Powered by %s%s</t>
+        <t t-raw="final_message % (febno_logo, _message and ('- %s' % _message) or '')"/>
+    </template>
+
+</odoo>

@@ -1,0 +1,46 @@
+<odoo>
+
+    <record id="sale_charges" model="ir.ui.view">
+        <field name="name">add_charges_sale_charges</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='order_lines']/group[@name='note_group']/group[@name='sale_total']/field[@name='amount_untaxed']"
+                   position="before">
+                <div class="o_setting_left_pane" groups="sale_delivery.group_shipping_charge_checker">
+                    <button name="action_ship_delivery_wizard" type="object">
+                        <i class="fa fa-arrow-right mr-1"/>
+                        Shipping Charge :
+                    </button>
+                </div>
+                <div class="o_setting_right_pane" groups="sale_delivery.group_shipping_charge_checker">
+                    <field name="ship_charge" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </div>
+                <div class="o_setting_left_pane" groups="sale_delivery.group_transportation_charge_checker">
+                    <button name="action_open_delivery_wizard_sale_transport" type="object">
+                        <i class="fa fa-arrow-right mr-1"/>
+                        Transportation Charge :
+                    </button>
+                </div>
+                <div class="o_setting_right_pane" groups="sale_delivery.group_transportation_charge_checker">
+                    <field name="transport_charge" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+     <record id="view_order_form_with_carrier_button_hide" model="ir.ui.view">
+        <field name="name">view_order_form_with_carrier_button_hide</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="25"/>
+        <field name="inherit_id" ref="delivery.view_order_form_with_carrier"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook/page[@name='order_lines']/div" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+     </record>
+
+</odoo>

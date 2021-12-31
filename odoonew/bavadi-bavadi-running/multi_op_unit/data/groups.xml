@@ -1,0 +1,5 @@
+<odoo>
+        <record id="group_op_unit_in_journal_lines" model="res.groups">
+            <field name="name">Operating Unit field in Journal lines</field>
+        </record>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        <menuitem id="sales_menu_finance_receivables"
+                  name="Customers"
+                  parent="sale.sale_menu_root"
+                  action="account.action_account_payments"
+                  sequence="3"
+                  groups="group_customer_invoicing"/>
+
+        <menuitem id="sales_customers_invoices"
+                  name="Invoices"
+                  parent="sales_menu_finance_receivables"
+                  action="account.action_move_out_invoice_type"
+                  sequence="1"/>
+
+        <menuitem id="sales_customers_creditnotes"
+                  name="Credit Notes"
+                  parent="sales_menu_finance_receivables"
+                  action="account.action_move_out_refund_type"
+                  sequence="1"/>
+
+        <menuitem id="sales_customers_receipts"
+                  name="Receipts"
+                  parent="sales_menu_finance_receivables"
+                  action="account.action_move_out_receipt_type"
+                  sequence="1"/>
+
+        <menuitem id="sales_customers_importinvoicebills"
+                  name="Import invoice bills"
+                  parent="sales_menu_finance_receivables"
+                  action="invoice_vendor_bill_bulk_import.import_invoice_wizard_action"
+                  sequence="1"/>
+
+        <menuitem id="sales_customers_payments"
+                  name="Payments"
+                  parent="sales_menu_finance_receivables"
+                  action="account.action_account_payments"
+                  sequence="15"/>
+
+        <menuitem id="sales_customers_followupreports"
+                  name="Follow-up Reports"
+                  parent="sales_menu_finance_receivables"
+                  action="base_accounting_kit.action_view_list_customer_statements"
+                  sequence="20"/>
+
+        <menuitem id="sales_customers_products"
+                  name="Products"
+                  parent="sales_menu_finance_receivables"
+                  action="account.product_product_action_sellable"
+                  sequence="100"/>
+
+        <menuitem id="sales_customers_customers"
+                  name="Customers"
+                  parent="sales_menu_finance_receivables"
+                  action="account.res_partner_action_customer"
+                  sequence="110"/>
+    </data>
+
+</odoo>
+

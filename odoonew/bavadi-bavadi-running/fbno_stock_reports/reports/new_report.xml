@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+                id="action_report_pdf"
+                model="remaining.product"
+                string="PDF Report"
+                report_type="qweb-pdf"
+                name="fbno_stock_reports.remaining_product_report"
+                file="fbno_stock_reports.remaining_product_report"
+        />
+    </data>
+</odoo>

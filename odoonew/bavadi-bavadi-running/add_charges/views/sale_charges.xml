@@ -1,0 +1,17 @@
+<odoo>
+
+        <record id="sale_charges" model="ir.ui.view">
+            <field name="name">add_charges_sale_charges</field>
+            <field name="model">sale.order</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page[@name='order_lines']/group[@name='note_group']/group[@name='sale_total']/field[@name='amount_untaxed']"
+                       position="after">
+                    <field name="ship_charge" widget="monetary" options="{'currency_field': 'currency_id'}" groups="add_charges.group_shipping_charge_checker"/>
+                    <field name="transport_charge" widget="monetary" options="{'currency_field': 'currency_id'}" groups="add_charges.group_transportation_charge_checker"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="res_config_settings_view_form_account_department" model="ir.ui.view">
+            <field name="name">settings_view_form_account_department</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='account']" position="inside">
+                    <h2>Others</h2>
+                    <div class="row mt16 o_settings_container" id="others">
+                        <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Import Journal Entries' menu on Account module">
+                            <div class="o_setting_left_pane">
+                                <field name="group_import_journal" string="Import Journal Entries"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_import_journal"/>
+                                <div class="text-muted">
+                                     If enabled, 'Import Journal Entries' submenu will be visible in 'Accounting'
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" title="Allows you to use the department accounting">
+                            <div class="o_setting_left_pane">
+                                <field name="group_department_accounting" string="Department Accounting"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_department_accounting"/>
+                                <div class="text-muted">
+                                     Track costs &amp; revenues by department
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_move_form_new" model="ir.ui.view">
+            <field name="name">department_view_move_form_new</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account_operating_unit.view_move_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='department_id']" position="attributes" >
+                        <attribute name="groups">account_department.group_department_accounting</attribute>
+                 </xpath>
+                 <xpath expr="//field[@name='line_ids']/tree//field[@name='department_id']" position="attributes">
+                        <attribute name="groups">account_department.group_department_accounting</attribute>
+                 </xpath>
+            </field>
+        </record>
+
+
+</odoo>

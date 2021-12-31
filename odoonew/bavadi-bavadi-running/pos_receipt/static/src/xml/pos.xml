@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <templates id="template_custom_pos_branch_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+        <t t-extend="OrderReceipt">
+			 <t t-jquery="[t-if='receipt.company.contact_address']" t-operation="replace">
+				 <t t-if="widget.pos.company.company_arabic">
+					 <div style="font-size:15pt;"><b><t t-esc='widget.pos.company.company_arabic' /></b></div></t>
+			 </t>
+<!--             <t t-jquery="[t-if='!receipt.header_html and receipt.header']" t-operation="after">-->
+<!--		        <div style="padding-top:10px;margin-bottom:-5px;margin-left:-16px;">Branch Address:-->
+<!--					<t t-esc="widget.pos.pos_config.branch_address"/></div>-->
+<!--		    </t>-->
+
+			<t t-jquery="[t-if='receipt.cashier']" t-operation="after">
+				<div  style="padding-top:20px;margin-bottom:-30px;">
+				  <div style="font-size:18pt;">
+					<t t-esc="receipt.name"/></div>
+				  <div><t t-esc='receipt.date.localestring'/></div>
+				</div>
+			</t>
+            <t t-jquery="[t-if='receipt.company.vat']" t-operation="replace">
+
+		    </t>
+			<t t-jquery="[t-esc='widget.pos.pos_session.branch_id[1]']" t-operation="after">
+		        <t t-if='receipt.company.vat'>
+					<div style="font-size:10pt;font-weight:bold;">Tax ID:<t t-esc='receipt.company.vat'/></div>
+				</t>
+		    </t>
+			 <t t-jquery="[t-if='receipt.company.email']" t-operation="after">
+		        <t t-if='receipt.company.website'>
+                    <div><t t-esc='receipt.company.website' /></div>
+                </t>
+		    </t>
+			 <t t-jquery="div.pos-receipt-order-data" t-operation="replace">
+
+			</t>
+
+			<t t-jquery="div.pos-receipt" t-operation="attributes">
+				<attribute name="style">right-padding:20px;</attribute>
+            </t>
+			<t t-jquery="div.pos-receipt-right-align" t-operation="attributes">
+				<attribute name="style">right-padding:40px;</attribute>
+			</t>
+			<t t-jquery="div.pos-receipt-amount receipt-change" t-operation="attributes">
+				<attribute name="style">right-padding:40px;</attribute>
+			</t>
+			<t t-jquery="div.pos-receipt-amount" t-operation="attributes">
+				<attribute name="style">right-padding:40px;</attribute>
+			</t>
+			<t t-jquery="span[class='pos-receipt-right-align']" t-operation="attributes">
+				<attribute name="style">right-padding:40px;</attribute>
+			</t>
+			<t t-jquery="div[class='pos-receipt-amount receipt-change']" t-operation="after">
+				<br/>
+<!--				<img src='/pos_receipt/static/src/img/qr_code.jpeg' style="height:130px; width:130px;margin-left:70px; "/>-->
+				<div style="margin-left:77px;" >
+                    <div t-attf-id="qrcode_container">
+                        <div id="qrcode"></div>
+                        <script type="text/javascript">
+                            var qr_data ="Invoice_No : <t
+                                t-esc="receipt.name"/>;Date : <t t-esc="receipt.date.localestring"/>;Total_Vat : <t
+                                t-esc="widget.format_currency(receipt.total_tax)"/>;Total_Amount : <t
+                                t-esc="widget.format_currency(receipt.total_with_tax)"/>;<t t-if="receipt.company.vat">Vat_No :<t
+                                t-esc="receipt.company.vat"/><t>ؘ</t></t>";
+                            var qrcode = new QRCode('qrcode' , {
+                            text: qr_data,
+                            width: 130,
+                            height: 130,
+                            colorDark : "#000000",
+                            colorLight : "#ffffff",
+                            correctLevel : QRCode.CorrectLevel.H
+                            });
+                            qrcode.makeCode(qr_data);
+
+<!--                            $("#qrcode > img").css({"margin":"20px auto"});-->
+                        </script>
+                    </div>
+            </div>
+
+
+			</t>
+
+       </t>
+    </templates>

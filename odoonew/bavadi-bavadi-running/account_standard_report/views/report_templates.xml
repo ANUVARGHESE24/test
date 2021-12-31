@@ -1,0 +1,62 @@
+<odoo>
+
+    <template id="external_layout_standard">
+        <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            <br/>
+            <div class="row">
+                <div class="col-1 mb4"/>
+                <div class="col-10 text-center" name="company_address" style="color:blue;">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" style="max-height: 120px;" alt="Logo"/>
+                            <strong style="font-size:18px;" t-field="company.partner_id"/><br/>
+                            <span t-field="company.street"/>, <span t-field="company.city"/>, <span t-field="company.state_id"/>, <span t-field="company.country_id"/><br/>
+                            TRN NO. <span t-field="company.vat"/><br/>
+                            TEL NO : <span t-field="company.phone"/><br/>
+                            EMAIL  : <span t-field="company.email"/><br/>
+                </div>
+            </div>
+        </div>
+
+        <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+        <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item d-inline">Phone: <span class="o_force_ltr" t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item d-inline">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item d-inline">Web: <span t-field="company.website"/></li>
+                </ul>
+<!--                <div name="financial_infos">-->
+<!--                    <span t-field="company.report_footer"/>-->
+<!--                </div>-->
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+
+    <template id="external_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-call="account_standard_report.external_layout_standard"><t t-raw="0"/></t>
+    </template>
+
+
+</odoo>
+

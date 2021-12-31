@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="fbno_pos_order_report" string="Order Details" model="pos.order" report_type="qweb-pdf" name="pos_receipt.fbno_pos_order_details_report_template" file="pos_receipt.fbno_pos_order_details_report_template"/>
+
+        <template id="fbno_pos_order_details_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">                   
+                            <h1 align="center">Order Details</h1>
+                            <br></br>
+                            <br></br>
+                            <div class="oe_structure"></div>
+                            <div class="row">
+                                <center>
+                                    <div class="col-xs-8" style="margin:auto">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Order Ref</th>
+                                                    <th>Date</th>
+                                                    <th>Session</th>
+                                                    <th>Branch</th>
+                                                    <th>Cashier</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="doc.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="doc.date_order"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="doc.session_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="doc.branch_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="doc.user_id.name"/>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </center>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <center>
+                                    <div class="col-xs-8" style="margin:auto">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Discount</th>
+                                                    <th>Taxes</th>
+                                                    <th>Subtotal w/o tax</th>
+                                                    <th>Subtotal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="doc.lines" t-as="line">
+                                                    <tr>
+                                                        <td>
+                                                            <t t-esc="line.product_id.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.qty"/>
+                                                        </td> 
+                                                        <td>
+                                                            <t t-esc="line.price_unit"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.discount"/>%
+                                                        </td>
+                                                        <td>
+                                                            VAT 15%
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.price_subtotal"/>
+                                                        </td>
+                                                        <td>
+                                                            <t t-esc="line.price_subtotal_incl"/>
+                                                        </td>                                              
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </center>
+                            </div>
+
+
+
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="group_shipping_charge_checker" model="res.groups">           <!-- group for the checkbox in settings -->
+            <field name="name">Sales / Shipping charges Activator</field>
+        </record>
+        <record id="group_transportation_charge_checker" model="res.groups">           <!-- group for the checkbox in settings -->
+            <field name="name">Sales / Transportation charges Activator</field>
+        </record>
+
+</odoo>

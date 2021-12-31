@@ -1,0 +1,4 @@
+.pos *::-webkit-scrollbar {
+    width: 20px;
+    height: 4px;
+}

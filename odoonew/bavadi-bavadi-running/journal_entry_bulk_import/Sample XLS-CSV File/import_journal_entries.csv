@@ -1,0 +1,7 @@
+date,code,account_id,partner,debit,credit
+2020-10-30,1007,Furniture & Fixtures, ,18150.00 ,0
+2020-10-30,1009,Machines and Equipment,, 23662.96 ,0
+2020-10-30,1010,Computer Hardware,, 86909.15,0
+2020-10-30,1007,Furniture & Fixtures,,0,18150.00
+2020-10-30,1009,Machines and Equipment,,0, 23662.96
+2020-10-30,1010,Computer Hardware,,0,86909.15

@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+		<record id="ir_seq_hr_loan" model="ir.sequence">
+			<field name="name">Loan Request</field>
+			<field name="code">hr.loan.seq</field>
+			<field name="prefix">LOAN/</field>
+			<field name="padding">4</field>
+			<field name="number_increment">1</field>
+			<field name="number_next_actual">1</field>
+			<field name="implementation">standard</field>
+		</record>
+
+
+		<!--Adding a salary rule for loan-->
+		<record id="hr_rule_loan" model="hr.salary.rule">
+            <field name="code">LO</field>
+            <field name="name">Loan</field>
+            <field name="category_id" ref="hr_payroll_13.DED"/>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.LO and - (inputs.LO.amount)</field>
+            <field name="appears_on_payslip" eval="True"/>
+            <field name="sequence" eval="191"/>
+        </record>
+
+	</data>
+</odoo>

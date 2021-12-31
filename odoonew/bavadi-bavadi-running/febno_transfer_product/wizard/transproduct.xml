@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <record id="transfer_product_details_form" model="ir.ui.view">
+            <field name="name">transfer.product.details.wizard.form</field>
+            <field name="model">transfer.product.details</field>
+            <field name="arch" type="xml">
+                <form string="Transfered Product Details">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+<!--                        <field name="product_id"/>-->
+<!--                        <field name="remaining_qty"/>-->
+                        <field name="operating_unit_ids"/>
+                    </group>
+                    <footer>
+                         <button name="print_report" type="object" string="Print PDF" class="oe_highlight"/>
+                        <button string="Print Excel" name="get_xlsx_report" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_transfer_product_details" model="ir.actions.act_window">
+            <field name="name">Transfer Product Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transfer.product.details</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="transfer_product_details_form"/>
+            <field name="target">new</field>
+        </record>
+     <menuitem
+        action="action_transfer_product_details"
+        id="menu_transfer_product_details"
+        name="Transfer Product Details"
+        parent="stock.menu_warehouse_report" sequence="160"/>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pricelist_operating_units" model="ir.ui.view">
+        <field name="name">pricelist.operating.units</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='country_group_ids']" position="after">
+                    <field name="operating_units"/>
+                    <field name="has_priceunit" invisible="1"/>
+                    <field name="user_oprunits_ids" widget="many2many_tags" invisible="1"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    <record id="pricelist_operating_unit" model="ir.ui.view">
+        <field name="name">pricelist.operating.unit</field>
+        <field name="model">product.pricelist</field>
+        <field name="priority">20</field>
+        <field name="inherit_id" ref="product.product_pricelist_view_tree"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="has_priceunit" invisible="1" force_save="1" />
+                    <field name="user_oprunits_ids" invisible="1" force_save="1"/>
+                    <field name="operating_units" invisible="1"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record model="ir.rule" id="operation_units_pricelist">
+        <field name="name">Operation Units: Pricelist</field>
+        <field name="model_id" ref="model_product_pricelist"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|', ('operating_units', 'in', user.operating_unit_ids.ids),('operating_units', '=', False)]</field>
+    </record>
+
+</odoo>

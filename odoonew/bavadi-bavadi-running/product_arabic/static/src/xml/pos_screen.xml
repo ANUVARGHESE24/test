@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="OrderReceipt">
+        <t t-jquery="t[t-if='simple']" t-operation="replace">
+             <t t-if='simple'>
+                 <div>
+                     <t t-esc='line.product_name_wrapped[0]'/>
+                       <span t-esc='widget.format_currency_no_symbol(line.price_display)' class="price_display pos-receipt-right-align"/>
+                 </div>
+                 <t t-if="line.product_name_arabic">
+                     <t t-esc='line.product_name_arabic'/>
+                 </t>
+                 <t t-call="OrderReceiptWrappedProductNameLines"/>
+             </t>
+        </t>
+        <t t-jquery="div[t-esc='line.product_name_wrapped[0]']" t-operation="replace">
+            <div>
+                <t t-esc='line.product_name_wrapped[0]'/>
+                <span class="price_display pos-receipt-right-align">
+                      <t t-esc='widget.format_currency_no_symbol(line.price_display)'/>
+                </span>
+
+            </div>
+        </t>
+
+         <t t-jquery="div.pos-receipt-left-padding" t-operation="replace">
+              <div class="pos-receipt-left-padding">
+                  <div>
+                      <t t-if="line.product_name_arabic">
+                          <t t-esc='line.product_name_arabic'/>
+                      </t>
+                  </div>
+                  <h3>
+                      <t t-esc="Math.round(line.quantity * Math.pow(10, pos.dp['Product Unit of Measure'])) / Math.pow(10, pos.dp['Product Unit of Measure'])"/>
+                      <t t-if='line.unit_name !== "Units"' t-esc='line.unit_name'/>
+                      x
+                      <t t-esc='widget.format_currency_no_symbol(line.price_display_one)' />
+                  </h3>
+
+              </div>
+
+        </t>
+<!--        <t t-jquery="div.orderlines" t-operation="replace"/>-->
+
+        <t t-jquery="div.orderlines" t-operation="attributes">
+            <attribute name="style">line-height: normal;overflow:auto;height: auto;width:95%;</attribute>
+        </t>
+    </t>
+    <t t-extend="Product">
+        <t t-jquery="article:first .product-name" t-operation="append">
+            <t t-if="product.product_arabic">
+                <br/>
+                <t t-esc="product.product_arabic"/>
+            </t>
+        </t>
+    </t>
+
+</templates>

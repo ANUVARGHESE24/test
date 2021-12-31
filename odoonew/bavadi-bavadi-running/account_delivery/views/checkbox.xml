@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="res_config_settings_view_form_account_charges" model="ir.ui.view">
+            <field name="name">settings_view_form_account_charges</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='account']/div[@id='invoicing_settings']" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Shipping charges' field in Invoice">
+                        <div class="o_setting_left_pane">
+                            <field name="group_shipping_charge_account_checker" string="Shipping Charges"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_shipping_charge_account_checker"/>
+                            <div class="text-muted">
+                                If enabled, 'Shipping Charges' field will be available
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Transportation charges' field in Invoice">
+                        <div class="o_setting_left_pane">
+                            <field name="group_transportation_charge_account_checker" string="Transportation Charges"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_transportation_charge_account_checker"/>
+                            <div class="text-muted">
+                                If enabled, 'Transportation Charges' field will be available
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+
+      <record id="view_delivery_carrier_form_account" model="ir.ui.view">
+            <field name="name">view_delivery_carrier_form_account</field>
+            <field name="model">delivery.carrier</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/div[@name='title']/h1/field[@name='name']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+            </field>
+      </record>
+
+</odoo>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report id="dayclose_report"
+                string="Dayclose Report"
+                model="dayclose.report.wizard"
+                report_type="qweb-pdf"
+                name="febno_dayclose_report.dayclose_template"
+                file="febno_dayclose_report.dayclose_template"
+                menu="False"/>
+
+        <template id="dayclose_template">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h1 align="center">Dayclose Report</h1>
+                        <h2>Branch:
+                            <t t-esc="form_data['operating_unit_id'][1]"/>
+                        </h2>
+
+                        <div class="oe_structure"/>
+                        <div class="row">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Serial No</th>
+                                        <th>Receipt No</th>
+                                        <th>Journal</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="serial_no" t-value="0"/>
+                                    <t t-set="sub_total" t-value="0"/>
+                                    <t t-set="cash_total" t-value="0"/>
+                                    <t t-set="bank_total" t-value="0"/>
+                                    <t t-foreach="units" t-as="o">
+                                        <t t-set="serial_no" t-value="serial_no + 1"/>
+                                        <t t-set="sub_total" t-value="sub_total + o['amount']"/>
+                                        <t t-if="o['journal_id']=='cash'">
+                                            <t t-set="cash_total" t-value="cash_total + o['amount']"/>
+                                        </t>
+                                        <t t-if="o['journal_id']=='bank'">
+                                            <t t-set="bank_total" t-value="bank_total + o['amount']"/>
+                                        </t>
+                                        <tr>
+                                            <td>
+                                                <t t-esc="serial_no"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="o['name']"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="o['journal_id']"/>
+                                            </td>
+                                            <td>
+                                                <t t-esc="o['amount']"/>
+                                                SR
+                                            </td>
+                                        </tr>
+
+                                    </t>
+                                </tbody>
+                            </table>
+
+                        </div>
+                            <div class="clearfix">
+                                <div id="total" class="row">
+                                    <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto">
+                                        <table class="table table-sm">
+
+                                            <tr class="border-blue o_subtotal">
+                                                <td>
+                                                    <H5> <strong>Cash Total</strong></H5>
+                                                </td>
+                                               <H5> <td class="text-right">
+                                                    <t t-esc="cash_total"
+                                                       t-options='{"widget": "float", "precision": 2}'/>
+                                                    SR
+                                               </td></H5>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <H5> <strong>Bank Total</strong></H5>
+                                                </td>
+                                               <H5> <td class="text-right">
+                                                    <t t-esc="bank_total"
+                                                       t-options='{"widget": "float", "precision": 2}'/>
+                                                    SR
+                                               </td></H5>
+                                            </tr>
+                                             <tr class="border-blue o_subtotal">
+                                                <td>
+                                                    <H5> <strong>Total</strong></H5>
+                                                </td>
+                                               <H5> <td class="text-right">
+                                                    <t t-esc="sub_total"
+                                                       t-options='{"widget": "float", "precision": 2}'/>
+                                                    SR
+                                               </td></H5>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="group_customer_receipts" model="res.groups">
+            <field name="name">Customers Receipts</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+        <record id="group_vendor_receipts" model="res.groups">
+            <field name="name">Vendors Receipts</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+    </data>
+</odoo>

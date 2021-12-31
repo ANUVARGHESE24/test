@@ -1,0 +1,14 @@
+<odoo>
+
+       <record id="add_text_amount_to_invoice_form" model="ir.ui.view">
+           <field name="name">add.text.amount.to.invoice.form</field>
+           <field name="model">account.move</field>
+           <field name="inherit_id" ref="new_fields.account_new_fields"/>
+           <field name="arch" type="xml">
+               <xpath expr="//sheet/notebook/page[@id='invoice_tab']/group" position="inside">
+                   <field name="text_amount"/>
+               </xpath>
+           </field>
+       </record>
+
+</odoo>

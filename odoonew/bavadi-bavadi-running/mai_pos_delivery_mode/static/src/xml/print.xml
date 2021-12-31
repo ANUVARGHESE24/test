@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template >
+	<t t-name="OrderChangeReceiptForPitzPizza">
+		<receipt>
+			<div style="text-align: center">
+				<h1><t t-esc="changes.delivery_type" /></h1>
+			</div>
+		</receipt>
+	</t>
+</template>

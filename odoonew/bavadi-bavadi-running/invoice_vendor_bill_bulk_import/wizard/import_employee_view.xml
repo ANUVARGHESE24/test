@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Import journal Wizard View -->
+        <record id="import_invoice_form_view" model="ir.ui.view">
+            <field name="name">import.invoice.wizard.view</field>
+            <field name="model">import.invoice</field>
+            <field name="arch" type="xml">
+                <form string="Import invoice">
+                     <group>
+                            <field name="invoice_type" widget="radio"/>
+                        </group>
+                    <group>
+                        <group>
+                            <field name="file_type" widget="radio"/>
+                        </group>
+                        <group>
+                            <field name="file" placeholder="Upload Your File"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="import_invoice" string="Import" type="object" icon="fa-download"
+                                class="btn btn-primary active"/>
+                        <button string="Cancel" special="cancel" icon="fa-times" class="btn btn-danger"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Import import_invoice Wizard Action -->
+        <record id="import_invoice_wizard_action" model="ir.actions.act_window">
+            <field name="name">Import invoice</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">import.invoice</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

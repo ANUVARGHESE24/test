@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_tranfer"
+            string="Transfer Details"
+            model="transfer.product.details"
+            report_type="qweb-pdf"
+            file="febno_transfer_product.report_transfer_details"
+            name="febno_transfer_product.report_transfer_details"
+
+        />
+          <report
+            id="action_report_tranfer_xls"
+            string="Transfer Details xlsx"
+            model="transfer.product.details"
+            report_type="xlsx"
+            file="febno_transfer_product.report_transfer_details_xls"
+            name="febno_transfer_product.report_transfer_details_xls"
+
+        />
+    </data>
+</odoo>

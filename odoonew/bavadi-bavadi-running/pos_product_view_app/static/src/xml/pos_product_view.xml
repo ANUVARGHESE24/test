@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<template id="pos_product_view" xml:space="preserve" inherit_id ="point_of_sale.template">	
+	<t t-extend="ProductCategoriesWidget">
+		 <t t-jquery=".searchbox" t-operation='before'>
+		 	<t t-if="widget.pos.config.is_product_grid_view">
+			 	<div class="product_view" style="position: absolute;right: 194px;top: 10px;">
+		       		<span class="btn js-product-list-view">
+		       			<i class="fa fa-list  " style="font-size: xx-large;padding-right: 11px; color:#808080"></i>
+		       		</span>
+		       		<span class="btn js-product-grid-view">
+		       			<i class="fa fa-th js-product-grid" style="font-size: xx-large;padding-right: 11px;color:#808080"></i>
+		       		</span>
+		   		</div>
+	   		</t>
+	    </t>
+	  </t>  
+	  <t t-name="ProductListWidget">
+        <div class='product-list-container'>
+            <div class="product-list-scroller touch-scrollable">                
+                <div class="product-list product-grid">
+                </div>            
+                <table class="product-list product-tree">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Code</th>                       
+                            <th>UoM</th>
+                            <th>Sale Price</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>               
+                   	<tbody class='product-list-contents'>
+                    </tbody>               
+               </table>
+                
+            </div>
+        </div>            
+    </t>  
+    <t t-name="ProductListLine">
+        <tr  class='client-line' t-att-data-product-id="product.id" tabindex="0" t-attf-aria-labelledby="article_product_#{product.id}">
+            <td class="product-img">
+                    <img t-att-src='image_url' height='45px'/> 
+            </td>            
+            <td class="product-name">
+                <t t-esc="product.display_name"/>
+            </td>
+            <td>
+                <t t-if="product.default_code != ' '">
+                    <t t-esc="product.default_code"/>
+                </t>
+                <t t-else="">
+                    <span>N/A</span>
+                </t>
+            </td>
+            <td>
+                <t t-esc="widget.pos.units_by_id[product.uom_id[0]].name"/>
+            </td>
+            <td class="text-right">
+                <span class="price-tag text-right">
+                    <t t-esc="widget.format_currency(product.lst_price,'Product Price')"/>
+                </span>
+            </td>
+            <td class="text-center">
+                <t t-esc="widget.format_currency(product.standard_price,'Product Price')"/>
+            </td>
+        </tr>
+    </t>   
+</template>

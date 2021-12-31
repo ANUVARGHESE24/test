@@ -1,0 +1,172 @@
+<odoo>
+
+    <report
+        id="com_report_sale_pdf"
+        model="sale.order"
+        string="Commercial Invoice"
+        name="sale_com_report.com_report_sale_pdf_view"
+        file="sale_com_report.com_report_sale_pdf"
+        report_type="qweb-pdf"
+        menu="True"
+        print_report_name="(object._get_report_base_filename())"/>
+
+
+    <template id="com_report_sale_pdf_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="sale_com_report.external_layout">
+                    <div class="page">
+                        <br/>
+                        <style>
+                            table {
+                                border-collapse: collapse;
+                                border: 2px solid black;
+                                table-layout: auto;
+                                width: 100%;
+                            }
+                            td{
+                                text-align:left; font-size:14px; border:1px solid black;
+                            }
+                            th{
+                                border:2px solid black;
+                                vertical-align:center; text-align:center; font-size:14px;
+                            }
+                            .inner{
+                                margin-top:5px;
+                                display: inline; float: left;
+                                font-size:14px;
+                            }
+                            .inner span{
+                                margin-left:10px;
+                            }
+                            .darker{
+                                border: 2px solid black;
+                            }
+                        </style>
+
+                        <table class="table table-condensed">
+                            <tr>
+                                <th colspan="5" style="font-size:18px;">COMMERCIAL INVOICE</th>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="padding:0px 0px 0px 0px;">
+                                    <div style="width:35%; float:left; margin-left:10px; margin-top:10px;">
+                                        <div style="font-weight: bold; text-decoration: underline;">Buyer/Consignee:</div>
+                                        <p>
+                                            <t t-if="doc.partner_id.company_type == 'company'">
+                                                <span style="font-weight: bold;" t-field="doc.partner_id.name"/><br/>
+                                                <span t-field="doc.partner_id.city"/>, <span t-field="doc.partner_id.state_id"/>, <span t-field="doc.partner_id.country_id"/><br/>
+                                            </t>
+                                            <t t-else="doc.partner_id.company_type == 'individual'">
+                                                <span style="font-weight: bold;" t-field="doc.partner_id.parent_id.name"/><br/>
+                                                <span t-field="doc.partner_id.city"/>, <span t-field="doc.partner_id.state_id"/>, <span t-field="doc.partner_id.country_id"/><br/>
+                                            </t>
+                                        </p>
+                                    </div>
+                                    <div style="width:50%; float:right; border-left:1px solid;">
+                                        <div class="inner" style=" width: 30%; margin-left:10px;">
+                                            <t t-if="doc.state == 'draft'">
+                                                Quotation No.<br/>
+                                                Quotation Date<br/>
+                                            </t>
+                                            <t t-else="doc.state == 'sale'">
+                                                Order No.<br/>
+                                                Order Date<br/>
+                                            </t>
+                                            Vessel Number<br/>
+                                            Container No.<br/>
+                                            Country Of Origin<br/>
+                                            Destination<br/>
+                                            Payment Terms
+                                        </div>
+                                        <div class="inner">
+                                            :<span t-field="doc.name"/><br/>
+                                            :<span t-field="doc.date_order" t-options='{"format": "dd/MM/yyyy"}'/><br/>
+                                            :<span t-field="doc.vessel_no"/><br/>
+                                            :<span t-field="doc.container_no"/><br/>
+                                            :<span t-field="doc.country_origin"/><br/>
+                                            :<span t-field="doc.partner_id.city"/>, <span t-field="doc.partner_id.country_id"/><br/>
+                                            :<span t-field="doc.payment_term_id"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <t t-set="i" t-value="1"/>
+                            <t t-set="qty" t-value="0"/>
+                            <t t-set="subtotal" t-value="0"/>
+                            <t t-set="currency" t-value="doc.partner_id.currency_id.symbol"/>
+                            <t t-set="currency_name" t-value="doc.partner_id.currency_id.name"/>
+                            <tr class="darker">
+                                <th style="width:5%;">Sr.No</th>
+                                <th style="width:50%;">Description</th>
+                                <th style="width:12%;">Quantity (In CRTN)</th>
+                                <th style="width:13%;">Unit Price (<span t-esc="currency_name"/>)</th>
+                                <th style="width:20%;">Amount (<span t-esc="currency_name"/>)</th>
+                            </tr>
+                            <t t-foreach="doc.order_line" t-as="order">
+                                <t t-if="order.name != 'Ship Delivery Charges' and order.name != 'Transport Delivery Charges'">
+                                    <tr>
+                                        <td style="width:5%; text-align:center;">
+                                            <span t-esc="i"/>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </td>
+                                        <td style="width:50%;"><span t-field="order.product_template_id"/></td>
+                                        <td style="width:12%; text-align:right;"><span t-field="order.product_uom_qty"/></td>
+                                        <td style="width:13%; text-align:right;"><span t-field="order.price_unit"/></td>
+                                        <td style="width:20%; text-align:right;"><span t-esc="order.price_total"/></td>
+                                        <t t-set="qty" t-value="qty + order.product_uom_qty"/>
+                                        <t t-set="subtotal" t-value="subtotal + order.price_total"/>
+                                    </tr>
+                                </t>
+                            </t>
+                            <tr class="darker" style="font-weight: bold; font-size:14px">
+                                <td colspan="2" style="text-align:center;">Total</td>
+                                <td style="text-align:right;"><span t-esc="qty"/></td>
+                                <td style="text-align:right;"/>
+                                <td style="text-align:right;"><span t-esc="subtotal"/></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="5" style="padding:0px 0px 0px 0px;">
+                                    <div style="width:50%; border-left: 2px solid black; border-bottom: double; float:right;">
+                                        <div class="inner" style="width: 60%; font-weight: bold; text-align:right;">
+                                            Total Amount:<br/>
+                                            Shipping Charge:<br/>
+                                            Transportation Charge:<br/><br/><br/>
+                                            Net Amount:
+                                        </div>
+                                        <div class="col-11 inner" style="width: 40%; text-align:right;">
+                                            <span style="font-weight: bold;" t-esc="subtotal" t-options='{"widget": "monetary", "display_currency": doc.partner_id.currency_id}'/><br/>
+                                            <span t-field="doc.ship_charge"/><br/>
+                                            <span t-field="doc.transport_charge"/><br/><br/>
+                                            <div>
+                                                <div style="border-bottom: 1px solid black;"/>
+                                            </div>
+                                            <br/>
+                                            <span style="font-weight: bold;" t-field="doc.amount_total"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="float:left;">
+                                        <div style="margin-left:10px; margin-top:5px;">
+                                            <div style="font-weight: bold; text-decoration: underline;">Amount in words:</div>
+                                            <p><span t-esc="doc.amount_to_words(doc.amount_total)"/></p>
+                                        </div>
+                                        <div class="col-4" style="text-align:center; float:right;">Authorised Signatory<br/>
+                                            <div class="col-12" style="float:right;">
+                                                  <div style="height: 120px;"> </div>
+                                                  <div style="border-bottom: 1px solid black;"/><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="res_config_settings_view_form_purchase_import_check" model="ir.ui.view">
+            <field name="name">settings_view_form_purchase_import_check</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="25"/>
+            <field name="inherit_id" ref="purchase_vendor.new_res_config_settings_view_form_purchase"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='purchase']/div[2]" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Import Vendor bills' menu on Purchase module">
+                        <div class="o_setting_left_pane">
+                            <field name="group_import_vendor_bills_checker" string="Import Vendor bills"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="group_import_vendor_bills_checker"/>
+                            <div class="text-muted">
+                                If enabled, 'Import Vendor bills' submenu will be available in 'Vendors' menu
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_config_settings_view_form_sales_import_check" model="ir.ui.view">
+            <field name="name">settings_view_form_sales_import_check</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="sales_customer.res_config_settings_view_sales_customer"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='sale_management']/div[5]" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box" title="If enabled, activates 'Import invoice bills' menu on Sales module">
+                            <div class="o_setting_left_pane">
+                                <field name="group_import_invoice_bills_checker" string="Import Invoice bills"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_import_invoice_bills_checker"/>
+                                <div class="text-muted">
+                                    If enabled, 'Import invoice bills' submenu will be available in 'Customers' menu
+                                </div>
+                            </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

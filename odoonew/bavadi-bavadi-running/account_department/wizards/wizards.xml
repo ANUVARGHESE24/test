@@ -1,0 +1,37 @@
+<odoo>
+
+    <record id="financial_report_wiz_modified_department" model="ir.ui.view">
+            <field name="name">account.department.financial.report.extended.wiz</field>
+            <field name="model">financial.report</field>
+            <field name="inherit_id" ref="base_accounting_kit.financial_report_wiz_modified"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group[2]/field[@name='department_id']" position="attributes" >
+                        <attribute name="groups">account_department.group_department_accounting</attribute>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="expenses_report_wiz_modified_department" model="ir.ui.view">
+            <field name="name">account.department.expenses.report.extended.wiz</field>
+            <field name="model">expenses.report</field>
+            <field name="inherit_id" ref="base_accounting_kit.expenses_report_wiz_modified"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group[2]/field[@name='department_id']" position="attributes" >
+                        <attribute name="groups">account_department.group_department_accounting</attribute>
+                </xpath>
+            </field>
+    </record>
+
+    <record id="account_report_balance_view_department" model="ir.ui.view">
+            <field name="name">account.department.trial.balance</field>
+            <field name="model">account.balance.report</field>
+            <field name="inherit_id" ref="base_accounting_kit.account_report_balance_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="attributes" >
+                        <attribute name="groups">account_department.group_department_accounting</attribute>
+                </xpath>
+            </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--    Financial report common form view    -->
+        <record id="expenses_report_wiz_modified" model="ir.ui.view">
+            <field name="name">expenses.report.extended.wiz</field>
+            <field name="model">expenses.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="view_format" widget="radio" invisible="1"/>
+                            <field name="debit_credit"/>
+                        </group>
+                        <group>
+                            <field name="enable_filter" invisible="1"/>
+                            <field name="target_move" widget="radio"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="operating_unit"/>
+                            <field name="department_id"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button string="Print PDF" name="view_report_pdf" type="object"
+                                class="btn-primary"/>
+                        <button name="get_xlsx_report" type="object" string="Print Excel" class="oe_highlight"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!--    Action for Expenses    -->
+        <record id="action_expenses_report" model="ir.actions.act_window">
+            <field name="name">Expenses</field>
+            <field name="res_model">expenses.report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="expenses_report_wiz_modified"/>
+            <field name="target">new</field>
+             <field name="context"
+                   eval="{'default_account_report_id':ref('base_accounting_kit.account_financial_report_expense0')}"/>
+
+        </record>
+
+        <menuitem id="account_financial_reports_expenses" sequence="1"
+                  name="Expenses" parent="base_accounting_kit.account_reports_audit"
+                  action="action_expenses_report"/>
+    </data>
+</odoo>
